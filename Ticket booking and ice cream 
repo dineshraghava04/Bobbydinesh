@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Booking with Ice Cream Event</title>
+    <style>
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #output {
+            font-family: Arial;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Welcome to Online Ticket Booking</h2>
+
+    <button onclick="bookTicket()">Book Ticket</button>
+    <button onclick="orderIceCream()">Order Ice Cream</button>
+
+    <div id="output"></div>
+
+    <script>
+        // Person object constructor
+        function Person(name, age, isStudent) {
+            this.name = name;
+            this.age = age;
+            this.isStudent = isStudent;
+        }
+
+        // Function to calculate dynamic discount
+        function calculateDiscount(person) {
+            if (person.age < 12) return 0.5;
+            if (person.age >= 60) return 0.3;
+            if (person.isStudent) return 0.2;
+            return 0.1;
+        }
+
+        // Function to book ticket
+        function bookTicket() {
+            const name = prompt("Enter your name:");
+            const age = parseInt(prompt("Enter your age:"));
+            const isStudent = confirm("Are you a student?");
+
+            const customer = new Person(name, age, isStudent);
+            const basePrice = 200;
+            const discount = calculateDiscount(customer);
+            const finalPrice = basePrice - (basePrice * discount);
+
+            const result = `
+                <h3>Ticket Booking Successful!</h3>
+                Name: ${customer.name} <br>
+                Age: ${customer.age} <br>
+                Student: ${customer.isStudent ? "Yes" : "No"} <br>
+                Discount Applied: ${discount * 100}% <br>
+                Final Ticket Price: ₹${finalPrice}<hr>
+            `;
+
+            document.getElementById("output").innerHTML += result;
+        }
+
+        // Ice cream event handler
+        function orderIceCream() {
+            const flavor = prompt("Enter your favorite ice cream flavor:");
+            document.getElementById("output").innerHTML += `
+                <h3>Ice Cream Ordered!</h3>
+                Enjoy your delicious <strong>${flavor}</strong> ice cream!<hr>
+            `;
+        }
+    </script>
+
+</body>
+</html>
