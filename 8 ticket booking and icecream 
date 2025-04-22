@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Ticket Booking</h3>
+<input id="tickets" type="number" placeholder="Tickets">
+<button onclick="book()">Book</button>
+<p id="output"></p>
+
+<h3>Ice Cream</h3>
+<button onclick="iceCream('Vanilla')">Vanilla</button>
+<button onclick="iceCream('Chocolate')">Chocolate</button>
+<button onclick="iceCream('Strawberry')">Strawberry</button>
+<p id="iceOutput"></p>
+
+<script>
+function Ticket(price) {
+  this.price = price;
+  this.total = function(qty) {
+    let discount = qty >= 10 ? 0.2 : qty >= 5 ? 0.1 : 0;
+    let total = qty * this.price;
+    return `Total: Rs.${total - total * discount} (Discount: ${discount * 100}%)`;
+  };
+}
+
+function book() {
+  let qty = parseInt(document.getElementById("tickets").value);
+  if (qty > 0) {
+    let t = new Ticket(100);
+    document.getElementById("output").innerText = t.total(qty);
+  } else {
+    document.getElementById("output").innerText = "Enter valid ticket number.";
+  }
+}
+
+function iceCream(flavor) {
+  document.getElementById("iceOutput").innerText = `You chose ${flavor} ice cream!`;
+}
+</script>
+
+</body>
+</html>
