@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Booking with Employee Inheritance</title>
+</head>
+<body>
+    <h2>Ticket Booking System</h2>
+    <div id="output"></div>
+
+    <script>
+        // Base class: Person
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        // Subclass: Employee extends Person
+        function Employee(name, age, empId, department) {
+            Person.call(this, name, age); // Inherit properties from Person
+            this.empId = empId;
+            this.department = department;
+        }
+
+        // Inherit methods from Person
+        Employee.prototype = Object.create(Person.prototype);
+        Employee.prototype.constructor = Employee;
+
+        // Ticket booking function
+        function bookTicket(employee, movie) {
+            return `
+                <strong>Booking Confirmed</strong><br>
+                Name: ${employee.name}<br>
+                Age: ${employee.age}<br>
+                Employee ID: ${employee.empId}<br>
+                Department: ${employee.department}<br>
+                Movie: ${movie}<br><hr>
+            `;
+        }
+
+        // Create employee object and display booking
+        const emp1 = new Employee("Dinesh Raghava", 25, "EMP1021", "IT");
+        const emp2 = new Employee("Kavya", 30, "EMP1022", "HR");
+
+        let output = "";
+        output += bookTicket(emp1, "Inception");
+        output += bookTicket(emp2, "Interstellar");
+
+        document.getElementById("output").innerHTML = output;
+    </script>
+</body>
+</html>
